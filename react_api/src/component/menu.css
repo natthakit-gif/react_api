@@ -1,0 +1,31 @@
+.headermenu {
+    background-color: black;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.headerweb {
+    color: blue;
+    text-align: center;
+    font-size: xx-large;
+    font-weight: 800;
+}
+
+.underlineminiheader {
+    text-decoration: underline;
+}
+
+.menuheaderselect {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+}
+
+.menuheaderselect a {
+    font-size: medium;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
