@@ -1,22 +1,32 @@
+import axios from 'axios';
 import BoxPost from '../component/box';
 import MenuHeader from '../component/menu';
 import './page1.css';
+import { useEffect, useState } from 'react';
 
 
 function Page1() {
-    const postList = [
-        { head: '1', msg: 'Hello1' },
-        { head: '2', msg: 'Hello2' },
-        { head: '3', msg: 'Hello3' },
-        { head: '4', msg: 'Hello4' },
-    ];
+    const [dataApi, setDataApi] = useState([]);
+
+    useEffect(() => {
+        const getapi = async () => {
+            try {
+                const responseData = await axios.get('http://localhost:3244/api/data');
+                setDataApi(responseData.data)
+                console.log(responseData.data)
+            } catch (error) {
+                alert(error.response.data);
+            }
+        }
+        getapi();
+    }, []);
     return (
         <div>
             <MenuHeader></MenuHeader>
             <div className='container-post'>
-                {postList.map((value, index) => (
-                    <BoxPost key={index} text={value.msg} title={value.head}></BoxPost>
-                ))}
+                {dataApi.length === 0 ? <div></div> : dataApi.map((value, index) =>
+                    <BoxPost id={value.id} title={value.title} text={value.text}></BoxPost>
+                )}
             </div>
         </div>
     );
