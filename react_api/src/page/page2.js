@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import MenuHeader from '../component/menu';
-import './page2.css'
 
 function Page2() {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(0);  // to request  to change something
     const [msg, setmsg] = useState('');
-    const text = useRef(null);
-    useEffect(() => {
+    const text = useRef(null); // to create object can change in round of render
+    useEffect(() => { // to spector action have condition in "if"
         if (count)
             setmsg("555555555555 " + count);
     }, [count])
