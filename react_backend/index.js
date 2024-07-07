@@ -22,7 +22,7 @@ db.connect((err) => {
 });
 
 app.use(cors());
-
+app.use(express.json());
 
 app.get('/api/data', (req, res) => {
     db.query('SELECT * FROM post', (err, results) => {
@@ -35,11 +35,26 @@ app.get('/api/data', (req, res) => {
 });
 
 app.post('/api/insertData', (req, res) => {
-    const {ff, qw} = req.body;
-    console.log(ff, qw);
+    const {tt, tx} = req.body;
+    db.query("INSERT INTO post (title, text) VALUES(?, ?)",[tt, tx],(err,results)=>{
+        if (err) {
+            res.status(500).send('Error post');
+        } else {
+            res.status(200).json('Post');
+        }
+    })
 });
 
-
+app.delete('/api/deleteData', (req, res) => {
+    const {id} = req.query;
+    db.query("DELETE FROM post WHERE (id = ?)",[id],(err,results)=>{
+        if (err) {
+            res.status(500).send('Not delete');
+        } else {
+            res.status(200).json('Delete');
+        }
+    });
+});
 
 app.listen(port, () => {
     console.log('API open in port ' + port)
